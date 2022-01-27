@@ -1,4 +1,5 @@
 import { CarModel } from '../models/CarModel.js';
+import mongoose from 'mongoose';
 import multer from 'multer';
 
 // define car photos storage
@@ -21,9 +22,10 @@ const upload = multer({
 }).single('photo');
 
 const createCarFunc = async(req, res) => {
+  const cruzCarsId = new mongoose.Types.ObjectId();
   const { modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address } = req.body;
   const photo = req.file.filename;
-  const carVar = new CarModel({ modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo });
+  const carVar = new CarModel({ cruzCarsId, modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo });
   const result = await carVar.save();
   res.send(result);
 }
