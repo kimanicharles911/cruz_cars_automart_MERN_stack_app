@@ -1,0 +1,8 @@
+npm i --save cors dotenv express mongoose
+npm i --save-dev nodemon
+
+npm i --save mongodb
+npm i --save bson
+npm i --save multer
+
+cruzCars

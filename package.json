@@ -1,0 +1,30 @@
+{
+  "name": "cruz_cars_automart_mern_stack_app",
+  "version": "1.0.0",
+  "description": "cruz_cars_automart_mern_stack_app",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cruz_cars_automart_MERN_stack_app.git"
+  },
+  "author": "Charles Kimani & EmmetHub",
+  "license": "MIT",
+  "dependencies": {
+    "bson": "^4.6.1",
+    "cors": "^2.8.5",
+    "dotenv": "^14.3.0",
+    "express": "^4.17.2",
+    "mongodb": "^4.3.1",
+    "mongoose": "^6.1.8",
+    "multer": "^1.4.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
