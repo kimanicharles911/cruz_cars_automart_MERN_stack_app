@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { uploadFunc, createCarFunc, getAllCarsFunc, getOneCarFunc, updateCarFunc } from '../controllers/carsController.js';
+import { uploadFunc, createCarFunc, getAllCarsFunc, getOneCarFunc, updateCarFunc, deleteOneCarFunc } from '../controllers/carsController.js';
 
 // Example URL: http://localhost:8081/api/v1/cars/
 router.get('/', (req, res) => {
@@ -11,6 +11,7 @@ router.post('/car', uploadFunc, createCarFunc);
 router.get('/car', getAllCarsFunc);
 router.get('/car/:id', getOneCarFunc);
 router.patch('/car/:id', uploadFunc, updateCarFunc);
+router.delete('/car/:id', deleteOneCarFunc);
 
 export {router as routes};
 
@@ -43,5 +44,7 @@ export {router as routes};
       "owner":"Craig Lukeshaw",
       "address":"2780, Stillwell Avenue Rd, Michigan"
     }
+
+  * Example DELETE URL: http://localhost:8081/api/v1/cars/car/61f37614e24f30ca0558cc41 
 
 */
