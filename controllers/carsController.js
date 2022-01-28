@@ -14,7 +14,7 @@ const storageObj = multer.diskStorage({
 });
 
 // multer upload params
-const upload = multer({
+const uploadFunc = multer({
   storage: storageObj,
   limits: {
     fieldSize: 1024 * 1024 * 3
@@ -22,12 +22,31 @@ const upload = multer({
 }).single('photo');
 
 const createCarFunc = async(req, res) => {
-  const cruzCarsId = new mongoose.Types.ObjectId();
-  const { modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address } = req.body;
-  const photo = req.file.filename;
-  const carVar = new CarModel({ cruzCarsId, modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo });
-  const result = await carVar.save();
-  res.send(result);
+  try{
+    const { modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address } = req.body;
+    const photo = req.file.filename;
+    const carVar = new CarModel({ modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo });
+    const result = await carVar.save();
+    res.status(201).send(result);
+  }catch(err){
+    return res.status(409).send(err.message);
+  }
 }
 
-export { upload, createCarFunc }
+const updateCarFunc = async(req, res) => {
+  try{
+    const { id } = req.params;
+    const { modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address } = req.body;
+    const photo = req.file.filename;
+    if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).send(`No post with id: ${id}`);
+    }
+    const updatedCarVar = { _id: id, modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo };
+    const result = await CarModel.findByIdAndUpdate(id, updatedCarVar, {new: true});
+    res.send(result);
+  }catch(err){
+    return res.send(err.message);
+  }
+};
+
+export { uploadFunc, createCarFunc, updateCarFunc }

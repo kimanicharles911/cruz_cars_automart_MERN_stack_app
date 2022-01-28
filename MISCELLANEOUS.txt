@@ -6,3 +6,14 @@ npm i --save bson
 npm i --save multer
 
 cruzCars
+
+
+{
+  "modelSpec": 2012
+  "makeSpec": "GMC Sierra 1500 SLT"
+  "sellingPrice": 29998
+  "mileage": 59000
+  "registrationNumber": "KDD 750C",
+  "owner":"Hillary Clement",
+  "address":"100, Baraka Rd, Dar-es-salaam"
+}
