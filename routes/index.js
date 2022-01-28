@@ -1,13 +1,15 @@
 import express from 'express';
 const router = express.Router();
-import { uploadFunc, createCarFunc, updateCarFunc } from '../controllers/carsController.js';
+import { uploadFunc, createCarFunc, getAllCarsFunc, getOneCarFunc, updateCarFunc } from '../controllers/carsController.js';
 
 // Example URL: http://localhost:8081/api/v1/cars/
 router.get('/', (req, res) => {
-  res.send('Hello user! You are in something called the backend in software development!')
+  res.send('Hello user! Our API root is found at /api/v1/cars .')
 });
 
 router.post('/car', uploadFunc, createCarFunc);
+router.get('/car', getAllCarsFunc);
+router.get('/car/:id', getOneCarFunc);
 router.patch('/car/:id', uploadFunc, updateCarFunc);
 
 export {router as routes};
@@ -25,6 +27,9 @@ export {router as routes};
       "owner": "Hillary Clement",
       "address": "100, Baraka Rd, Dar-es-salaam"
     }
+
+  * Example to get all cars GET URL: http://localhost:8081/api/v1/cars/car
+  * Example to get one car GET URL: http://localhost:8081/api/v1/cars/car/61f37614e24f30ca0558cc41
 
   * Example PATCH URL: http://localhost:8081/api/v1/cars/car/61f37614e24f30ca0558cc41
   * Example JSON to be sent in the request body:
