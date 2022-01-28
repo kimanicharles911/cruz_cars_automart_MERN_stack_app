@@ -5,7 +5,7 @@ import multer from 'multer';
 // define car photos storage
 const storageObj = multer.diskStorage({
   destination: function(request, file, callback){
-    callback(null, './uploadImages');
+    callback(null, './uploadedImages');
   },
   // add back file extension
   filename: function(request, file, callback){
