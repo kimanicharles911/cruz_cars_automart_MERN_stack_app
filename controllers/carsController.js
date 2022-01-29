@@ -29,7 +29,7 @@ const createCarFunc = async(req, res) => {
     const result = await carVar.save();
     res.status(201).send(result);
   }catch(err){
-    return res.status(409).send(`Problem creating car record. ${err.message}`);
+    return res.status(400).send(`Problem creating car record. ${err.message}`);
   }
 }
 
@@ -38,7 +38,7 @@ const getAllCarsFunc = async(req, res) => {
     const result = await CarModel.find();
     res.status(200).send(result);
   }catch(err){
-    return res.status(404).send(`Problem getting all car records. ${err.message}`);
+    return res.status(400).send(`Problem getting all car records. ${err.message}`);
   }
 };
 
@@ -48,7 +48,7 @@ const getOneCarFunc = async(req, res) => {
     const result = await CarModel.findById(id);
     res.status(200).send(result);
   }catch(err){
-    return res.status(404).send(`Problem getting the car's record. ${err.message}`);
+    return res.status(400).send(`Problem getting the car's record. ${err.message}`);
   }
 }
 
@@ -68,4 +68,14 @@ const updateCarFunc = async(req, res) => {
   }
 };
 
-export { uploadFunc, createCarFunc, getAllCarsFunc, getOneCarFunc, updateCarFunc }
+const deleteOneCarFunc = async(req, res) => {
+  try{
+    const { id } = req.params;
+    const result = await CarModel.deleteOne({ _id: id });
+    res.send(result);
+  }catch(err){
+    return res.status(400).send(`Problem deleting the car record. ${err.message}`);
+  }
+};
+
+export { uploadFunc, createCarFunc, getAllCarsFunc, getOneCarFunc, updateCarFunc, deleteOneCarFunc }
