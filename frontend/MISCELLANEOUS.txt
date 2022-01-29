@@ -1,0 +1,13 @@
+Recommended default installations
+==================================>
+@fortawesome/fontawesome-svg-core
+@fortawesome/free-brands-svg-icons
+@fortawesome/free-regular-svg-icons
+@fortawesome/free-solid-svg-icons
+@fortawesome/react-fontawesome
+bootstrap
+font-awesome
+react-bootstrap
+react-router-bootstrap
+jquery
+popper.js

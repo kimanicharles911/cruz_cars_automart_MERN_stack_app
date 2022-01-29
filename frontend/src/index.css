@@ -1,0 +1,5 @@
+/* I use the reset css to clear default browser styles 
+I use the normalize css to apply standardized browser CSS */
+@import-reset;
+@import-normalize;
+/* You can import google fonts below */
