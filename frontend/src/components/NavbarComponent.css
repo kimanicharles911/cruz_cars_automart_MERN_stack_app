@@ -1,0 +1,61 @@
+/* Assigned all anchor tags the Dancing Script font from Google fonts */
+a{
+  font-family: 'Dancing Script', cursive;
+}
+/* Assigned the Application's Name the Permanent Marker Google Font and white color */
+#brand-id{
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  text-decoration: none;
+}
+/* Applied the white color to the Application's name on hover. */
+.navbar-brand:hover{
+  color: #fff;
+}
+/* Assigned a red color to the NavBar */
+.nav-class{
+  background-color: #DC0714;
+}
+/* Assigned the white color to the responsive navbar toggler icon and it's border */
+#navbar-toggler{
+  color: #fff;
+  border-color: #fff;
+}
+/* Replaced an icon in the inner span of the Navbar Toggler Icon and assigned color and other background styling to this span */
+#navbar-toggler > span{
+  color: #fff;
+  background-image: url("../images/nav-icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+/* Assigned a white color to all hyper links in the navbar */
+#nav-link-class{
+  color: #fff;
+  padding-top: 0;
+  padding-bottom: 0;
+  text-decoration: none;
+}
+/* .buttons{
+  display: flex;
+  position: absolute;
+  right: 1rem;
+  top: 4.5rem;
+} */
+/* .font-awesome-icons{
+  color: #6084f1;
+  width: 30px;
+  text-align: right;
+  font-size: 14px;
+} */
+
+.font-awesome-icons{
+  margin-left: 10px;
+}
+/* Assigned a white color, width, text-alignment and font-size to the Plus icon and Github icon used in the two navbar buttons */
+#car-icon, #plus-icon, #sync-icon, #github-icon{
+  color: #fff;
+  /* width: 30px; */
+  text-align: right;
+  font-size: 14px;
+}
