@@ -1,0 +1,8 @@
+.modal-dialog{
+  width: 400px;
+}
+#save-changes-btn{
+  background-color: #DC0714;
+  color: #fff;
+  border-color: #DC0714;
+}

@@ -4,6 +4,7 @@ import './NavbarComponent.css';
 import {faCar, faPlus, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
 import {faGithub} from '@fortawesome/free-brands-svg-icons';
 import {Link} from 'react-router-dom';
+import {AddCarModalComponent} from '../components';
 
 /* 
   * I imported FontAwesomeIcon component from @fortawesome/react-fontawesome
@@ -13,11 +14,11 @@ import {Link} from 'react-router-dom';
   * I imported the Link component from the react-router-dom.
 */
 
-const NavbarComponent = () => {
+const NavbarComponent = ({ renderAgentProp, setRenderAgentProp }) => {
 
   return (
     <>
-      <Navbar className="nav-class" expand="sm">
+      <Navbar className="nav-class mb-2" expand="sm">
         <Container fluid>
           {/* Application Name */}
           <Navbar.Brand>
@@ -35,9 +36,11 @@ const NavbarComponent = () => {
                     <Link to="#" id="nav-link-class">
                       <FontAwesomeIcon icon={faCar} className="font-awesome-icons" id="car-icon"/>&nbsp;Available Cars
                     </Link>
-                    <Link to="#" id="nav-link-class">
-                      <FontAwesomeIcon icon={faPlus} className="font-awesome-icons" id="plus-icon"/>&nbsp;Add Car
-                    </Link>
+
+                    <Nav.Link href="#" id="nav-link-class" data-bs-toggle="modal" data-bs-target="#addCarModal"><FontAwesomeIcon icon={faPlus} className="font-awesome-icons" id="plus-icon"/>&nbsp;Add Car</Nav.Link>
+
+                    <AddCarModalComponent renderAgentProp={renderAgentProp} setRenderAgentProp={setRenderAgentProp}/>
+
                     <Link to="#" id="nav-link-class">
                       <FontAwesomeIcon icon={faSyncAlt} className="font-awesome-icons" id="sync-icon"/>&nbsp;Update Records
                     </Link>

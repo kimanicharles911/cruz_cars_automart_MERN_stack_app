@@ -27,9 +27,8 @@ const carSchema = new mongoose.Schema({
     required: true
   },
   photo: {
-    type: String,
-    maxLength: 100,
-    required: true
+    Data: Buffer,
+    ContentType: String
   },
   registrationNumber: {
     type: String,

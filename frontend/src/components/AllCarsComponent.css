@@ -1,0 +1,33 @@
+a{
+  font-family: 'Dancing Script', cursive;
+}
+.card{
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(220, 7, 20, 1);
+  /* width: 400px; */
+}
+.modal-dialog{
+  width: 400px;
+}
+.font-awesome-icons{
+  margin-left: 10px;
+}
+/* Assigned a white color, width, text-alignment and font-size to the Plus icon and Github icon used in the two navbar buttons */
+#car-icon, #plus-icon, #sync-icon, #github-icon{
+  color: #fff;
+  /* width: 30px; */
+  text-align: right;
+  font-size: 14px;
+}
+#card-section > .card > .card-body > .btn-danger {
+  color: #fff;
+  background-color: #DC0714;
+  border-color: #DC0714;
+  font-family: inherit;
+}
+.fa-crud-btns{
+  color: #DC0714;
+}
+#view-modal-header{
+  border-bottom: 0px;
+}

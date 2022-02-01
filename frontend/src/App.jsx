@@ -1,14 +1,16 @@
-import {NavbarComponent} from './components';
+import {NavbarComponent, MainComponent} from './components';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {useState} from 'react';
 
 const App = () => {
 
+  const [renderAgent, setRenderAgent] = useState(false);
+
   return (
     <Router>
-      <NavbarComponent />
+      <NavbarComponent renderAgentProp={renderAgent} setRenderAgentProp={setRenderAgent}/>
       <Routes>
-        
+        <Route path="/" element={<MainComponent renderAgentProp={renderAgent} setRenderAgentProp={setRenderAgent}/>}></Route>
       </Routes>
     </Router>
   );

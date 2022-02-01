@@ -1,6 +1,8 @@
 import { CarModel } from '../models/CarModel.js';
 import mongoose from 'mongoose';
 import multer from 'multer';
+import fileSystem from 'fs';
+import path from 'path';
 
 // define car photos storage
 const storageObj = multer.diskStorage({
@@ -24,45 +26,46 @@ const uploadFunc = multer({
 const createCarFunc = async(req, res) => {
   try{
     const { modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address } = req.body;
-    const photo = req.file.filename;
-    const carVar = new CarModel({ modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo });
+    const dataVar = fileSystem.readFileSync(path.join('./uploadedImages/' + req.file.filename));
+    const mimeType = `image/${path.extname(path.join('./uploadedImages/' + req.file.filename)).split('.').pop()}`;
+    
+    const carVar = new CarModel({ modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo: { Data: dataVar, ContentType: mimeType } });
+    fileSystem.unlinkSync('./uploadedImages/' + req.file.filename);
     const result = await carVar.save();
-    res.status(201).send(result);
+    return res.status(201).send(result);
   }catch(err){
     return res.status(400).send(`Problem creating car record. ${err.message}`);
   }
-}
-
-const getAllCarsFunc = async(req, res) => {
-  try{
-    const result = await CarModel.find();
-    res.status(200).send(result);
-  }catch(err){
-    return res.status(400).send(`Problem getting all car records. ${err.message}`);
-  }
 };
 
-const getOneCarFunc = async(req, res) => {
+const getCarsFunc = async(req, res) => {
   try{
-    const { id } = req.params;
-    const result = await CarModel.findById(id);
-    res.status(200).send(result);
+    if(req.query.id){
+      const { id } = req.query;
+      const result = await CarModel.findById(id);
+      return res.status(200).send(result);
+    }
+    const result = await CarModel.find();
+    return res.status(200).send(result);
   }catch(err){
-    return res.status(400).send(`Problem getting the car's record. ${err.message}`);
+    return res.status(400).send(`Problem getting car(s) record(s). ${err.message}`);
   }
-}
+};
 
 const updateCarFunc = async(req, res) => {
   try{
     const { id } = req.params;
     const { modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address } = req.body;
-    const photo = req.file.filename;
+    // const photo = req.file.filename;
+    const dataVar = fileSystem.readFileSync(path.join('./uploadedImages/' + req.file.filename));
+    const mimeType = `image/${path.extname(path.join('./uploadedImages/' + req.file.filename)).split('.').pop()}`;
     if(!mongoose.Types.ObjectId.isValid(id)){
       return res.status(404).send(`No post with id: ${id}`);
     }
-    const updatedCarVar = { _id: id, modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo };
+    const updatedCarVar = { _id: id, modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo: { Data: dataVar, ContentType: mimeType } };
+    fileSystem.unlinkSync('./uploadedImages/' + req.file.filename);
     const result = await CarModel.findByIdAndUpdate(id, updatedCarVar, {new: true});
-    res.send(result);
+    return res.send(result);
   }catch(err){
     return res.send(`Problem updating the car record. ${err.message}`);
   }
@@ -72,10 +75,10 @@ const deleteOneCarFunc = async(req, res) => {
   try{
     const { id } = req.params;
     const result = await CarModel.deleteOne({ _id: id });
-    res.send(result);
+    return res.send(result);
   }catch(err){
     return res.status(400).send(`Problem deleting the car record. ${err.message}`);
   }
 };
 
-export { uploadFunc, createCarFunc, getAllCarsFunc, getOneCarFunc, updateCarFunc, deleteOneCarFunc }
+export { uploadFunc, createCarFunc, getCarsFunc, updateCarFunc, deleteOneCarFunc }
