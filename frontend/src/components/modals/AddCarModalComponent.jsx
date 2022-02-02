@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 import './AddCarModalComponent.css';
-import {axiosErrorMessage, axiosResponseMessage, objectCreator, formDataCreator} from '../../modules';
+import {axiosErrorMessage, axiosResponseMessage, formDataCreator} from '../../modules';
 
 const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
 
@@ -120,10 +120,10 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
-  const addCarBtnHandler = () => {
+  const addCarBtnHandler = async() => {
     try{
       const newObject = formDataCreator.moduleFunc(field);
-      axios.post('/api/v1/cars/car', newObject)
+      await axios.post('/api/v1/cars/car', newObject)
         .then(res => {
           axiosResponseMessage.moduleFunc(res);
         }).catch(err => {

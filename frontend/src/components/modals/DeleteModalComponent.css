@@ -1,0 +1,9 @@
+.modal-dialog{
+  width: 400px;
+}
+#delete-changes-btn{
+  color: #fff;
+  background-color: #DC0714;
+  border-color: #DC0714;
+  font-family: inherit;
+}

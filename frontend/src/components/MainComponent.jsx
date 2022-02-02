@@ -1,5 +1,3 @@
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTrash, faPen, faEye } from '@fortawesome/free-solid-svg-icons';
 import './MainComponent.css';
 import {useEffect, useState} from 'react';
 import {AccordionComponent, AllCarsComponent} from './index.js'
