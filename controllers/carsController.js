@@ -67,7 +67,7 @@ const updateCarFunc = async(req, res) => {
     const result = await CarModel.findByIdAndUpdate(id, updatedCarVar, {new: true});
     return res.send(result);
   }catch(err){
-    return res.send(`Problem updating the car record. ${err.message}`);
+    return res.status(304).send(`Problem updating the car record. ${err.message}`);
   }
 };
 

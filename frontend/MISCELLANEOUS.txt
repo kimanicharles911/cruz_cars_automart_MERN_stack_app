@@ -26,8 +26,10 @@ react-router-bootstrap
 jquery
 popper.js
 
-npm i --save multer-gridfs-storage
 npm i --save buffer
+npm i --save http-proxy-middleware
+
+Learnt how to configure the Proxy Manually at https://create-react-app.dev/docs/proxying-api-requests-in-development/#configuring-the-proxy-manually
 
 2012
 Toyota 4Runner SR5

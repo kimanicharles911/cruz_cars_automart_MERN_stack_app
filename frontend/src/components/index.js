@@ -6,5 +6,6 @@ export {default as AllCarsComponent} from './AllCarsComponent.jsx';
 export {default as ViewModalComponent} from './modals/ViewModalComponent.jsx';
 export {default as EditModalComponent} from './modals/EditModalComponent.jsx';
 export {default as DeleteModalComponent} from './modals/DeleteModalComponent.jsx';
+export {default as MultipleUpdatesComponent} from './MultipleUpdatesComponent.jsx';
 
 // I created a file to ease importation of custom react components where they are used.

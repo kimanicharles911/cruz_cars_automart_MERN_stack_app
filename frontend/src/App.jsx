@@ -1,16 +1,33 @@
-import {NavbarComponent, MainComponent} from './components';
+import {NavbarComponent, MainComponent, MultipleUpdatesComponent} from './components';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 const App = () => {
 
+  const [allCars, setAllCars] = useState([]);
   const [renderAgent, setRenderAgent] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      let dataArr;
+      try{
+        const response = await fetch('/api/v1/cars/car');
+        console.log(`😜called`);
+        dataArr = await response.json();
+      }catch(err){
+        console.error(err);
+        dataArr = [];
+      }
+      setAllCars(dataArr);
+    })();
+  }, [renderAgent])
 
   return (
     <Router>
       <NavbarComponent renderAgentProp={renderAgent} setRenderAgentProp={setRenderAgent}/>
       <Routes>
-        <Route path="/" element={<MainComponent renderAgentProp={renderAgent} setRenderAgentProp={setRenderAgent}/>}></Route>
+        <Route path="/" element={<MainComponent allCarsProp={allCars} setAllCarsProp={setAllCars} renderAgentProp={renderAgent} setRenderAgentProp={setRenderAgent}/>}></Route>
+        <Route path="/multipleupdates" element={<MultipleUpdatesComponent allCarsProp={allCars} setAllCarsProp={setAllCars} renderAgentProp={renderAgent} setRenderAgentProp={setRenderAgent}/>}></Route>
       </Routes>
     </Router>
   );
