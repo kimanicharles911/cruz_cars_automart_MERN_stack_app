@@ -32,3 +32,39 @@ https://www.bezkoder.com/node-js-upload-store-images-mongodb/
   "owner":"Hillary Clement",
   "address":"100, Baraka Rd, Dar-es-salaam"
 }
+
+
+Deployment
+===========>
+* Add this in package.json (backend):
+  "engines": {
+    "node": "16.13.2",
+    "npm": "8.1.2"
+  },
+  In scripts:
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+  Change scripts start from using nodemon to
+    "start": "node app.js",
+
+* Add this in app.js  (backend):
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('frontend/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  })
+}
+
+* Then run the following terminal commands
+  install heroku
+  heroku login
+  touch Procfile
+
+* Add this line in the Procfile which will depend with the name of your server file which in my case is app.js:
+  web: node app.js
+
+* Then run the following terminal commands:
+  heroku create cruzcarsautomartmern
+  git add . 
+  git commit -m"first deploy to heroku"
+  ## optional for pushing to github: git push -u origin master
+  git push heroku master

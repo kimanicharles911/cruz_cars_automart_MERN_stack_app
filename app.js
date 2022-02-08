@@ -18,6 +18,20 @@ mongoose.connect(`mongodb+srv://${MONGO_DB_USERNAME}:${mongoDbPassword}@emmethub
 
 app.use('/api/v1/cars', routes);
 
+/* 
+  * I created a function that enables serving of static files from the frontend.
+  * I begun with a condition that ensures that the operating environment is production.
+  * I then set the static folder location.
+  * I then set the route to all other possible routes so as to load the frontend root file which in react is a index.html file.
+*/
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('frontend/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    // res.status(404).send('Sorry! Can’t find that resource. Please check your URL.');
+  })
+}
+
 // From the app object with the express function I used the listen method and set the port.
 app.listen(EXPRESS_APP_PORT, () => {
   console.log(`😜 App Server is listening at http://localhost:${EXPRESS_APP_PORT}`);
