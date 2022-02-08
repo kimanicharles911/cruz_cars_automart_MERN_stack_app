@@ -20,6 +20,8 @@ https://www.bezkoder.com/node-js-upload-store-images-mongodb/
 7. https://www.youtube.com/watch?v=b6Oe2puTdMQ
 8. https://attacomsian.com/blog/uploading-files-nodejs-express
 
+Got dummy car from: https://www.alamy.com/crash-test-dummy-changing-car-wheel-3d-illustration-image382502779.html
+
 
 
 
@@ -36,6 +38,7 @@ https://www.bezkoder.com/node-js-upload-store-images-mongodb/
 
 Deployment
 ===========>
+* Git does not track empty folders so ensure you've manually added a little dummy data into any empty folder that is used by the application. For example those used by multer. In this case I added a dummy car image in the uploadedImages folder. This prevents POST, PATCH and PUT request errors on heroku.
 * Add this in package.json (backend):
   "engines": {
     "node": "16.13.2",
@@ -69,5 +72,17 @@ if(process.env.NODE_ENV === 'production'){
   ## optional for pushing to github: git push -u origin master
   git push heroku master
 
-* Set MongoDB Password by first excluding app.js from version control w/:
-  git update-index --assume-unchanged "app.js"
+* Set MongoDB Password by first:
+  • Replace the .env variable in the mongoose connection string with the password itself.
+  • Do not use && chained git commands.
+  • git add .
+  • git status
+  • git commit -m"attempt to deploy to heroku"
+  • git status
+  • git push heroku master #only pushes to heroku but not github
+  • git reset HEAD~1 #destroys the commit that had the mongoDB password exposed to version control
+  • git status
+  • Disable Heroku from reverting to an app.js file without a raw password by excluding app.js from version control w/:
+    git update-index --assume-unchanged "app.js"
+
+
