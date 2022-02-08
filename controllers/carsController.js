@@ -52,11 +52,24 @@ const getCarsFunc = async(req, res) => {
   }
 };
 
+const getSpecificCarsFunc = async(req, res) => {
+  try{
+    if(req.query.carAge){
+      const { carAge } = req.query;
+      const currentYear = new Date().getFullYear();
+      const floorYear = currentYear - carAge;
+      const result = await CarModel.where('modelSpec').gt(floorYear - 1);
+      return res.status(200).send(result);
+    }
+  }catch(err){
+    return res.status(400).send(`Problem getting car(s) with that age. ${err.message}`);
+  }
+};
+
 const updateCarFunc = async(req, res) => {
   try{
     const { id } = req.params;
     const { modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address } = req.body;
-    // const photo = req.file.filename;
     const dataVar = fileSystem.readFileSync(path.join('./uploadedImages/' + req.file.filename));
     const mimeType = `image/${path.extname(path.join('./uploadedImages/' + req.file.filename)).split('.').pop()}`;
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -67,7 +80,7 @@ const updateCarFunc = async(req, res) => {
     const result = await CarModel.findByIdAndUpdate(id, updatedCarVar, {new: true});
     return res.send(result);
   }catch(err){
-    return res.status(304).send(`Problem updating the car record. ${err.message}`);
+    return res.status(400).send(`Problem updating the car record. ${err.message}`);
   }
 };
 
@@ -81,4 +94,4 @@ const deleteOneCarFunc = async(req, res) => {
   }
 };
 
-export { uploadFunc, createCarFunc, getCarsFunc, updateCarFunc, deleteOneCarFunc }
+export { uploadFunc, createCarFunc, getCarsFunc, getSpecificCarsFunc, updateCarFunc, deleteOneCarFunc }

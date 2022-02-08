@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { uploadFunc, createCarFunc, getCarsFunc, updateCarFunc, deleteOneCarFunc } from '../controllers/carsController.js';
+import { uploadFunc, createCarFunc, getCarsFunc, getSpecificCarsFunc, updateCarFunc, deleteOneCarFunc } from '../controllers/carsController.js';
 
 // Example URL: http://localhost:8081/api/v1/cars/
 router.get('/', (req, res) => {
@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 
 router.post('/car', uploadFunc, createCarFunc);
 router.get('/car', getCarsFunc);
+router.get('/search', getSpecificCarsFunc);
 router.patch('/car/:id', uploadFunc, updateCarFunc);
 router.delete('/car/:id', deleteOneCarFunc);
 
@@ -30,6 +31,8 @@ export {router as routes};
 
   * Example to get all cars GET URL: http://localhost:8081/api/v1/cars/car
   * Example to get one car GET URL: http://localhost:8082/api/v1/cars/car?id=61f3bf1ec27ace1490f0b84b
+
+  * Example to search for cars GET URL: http://localhost:8080/api/v1/cars/search?carAge=9
 
   * Example PATCH URL: http://localhost:8081/api/v1/cars/car/61f37614e24f30ca0558cc41
   * Example JSON to be sent in the request body:

@@ -16,6 +16,10 @@ import {AddCarModalComponent} from '../components';
 
 const NavbarComponent = ({ renderAgentProp, setRenderAgentProp }) => {
 
+  const multipleUpdatesClickHandler = () => {
+    setRenderAgentProp(!renderAgentProp);
+  };
+
   return (
     <>
       <Navbar className="nav-class mb-2" expand="sm">
@@ -41,7 +45,7 @@ const NavbarComponent = ({ renderAgentProp, setRenderAgentProp }) => {
 
                     <AddCarModalComponent renderAgentProp={renderAgentProp} setRenderAgentProp={setRenderAgentProp}/>
 
-                    <Link to="/multipleupdates" id="nav-link-class">
+                    <Link to="/multipleupdates" id="nav-link-class" onClick={multipleUpdatesClickHandler}>
                       <FontAwesomeIcon icon={faSyncAlt} className="font-awesome-icons" id="sync-icon"/>&nbsp;Multiple Updates
                     </Link>
                     

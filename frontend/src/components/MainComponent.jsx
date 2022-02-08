@@ -5,7 +5,7 @@ const MainComponent = ({ allCarsProp, setAllCarsProp, renderAgentProp, setRender
 
   return(
     <main className="container fluid" id="main-container">
-      <AccordionComponent/>
+      <AccordionComponent allCarsProp={allCarsProp} setAllCarsProp={setAllCarsProp}/>
       <AllCarsComponent allCarsProp={allCarsProp} setAllCarsProp={setAllCarsProp} renderAgentProp={renderAgentProp} setRenderAgentProp={setRenderAgentProp}/>
     </main>
   )
