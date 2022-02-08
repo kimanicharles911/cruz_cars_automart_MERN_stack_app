@@ -68,3 +68,6 @@ if(process.env.NODE_ENV === 'production'){
   git commit -m"first deploy to heroku"
   ## optional for pushing to github: git push -u origin master
   git push heroku master
+
+* Set MongoDB Password by first excluding app.js from version control w/:
+  git update-index --assume-unchanged "app.js"
