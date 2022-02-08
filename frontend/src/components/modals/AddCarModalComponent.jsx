@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 import './AddCarModalComponent.css';
+import { Alert } from 'react-bootstrap';
 import {axiosErrorMessage, axiosResponseMessage, formDataCreator} from '../../modules';
 
 const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
@@ -15,6 +16,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     owner: '',
     address: ''
   });
+  const [showAlert, setShowAlert] = useState(false);
 
   const createModelSpecChangeHandler = (event) => {
     try{
@@ -120,30 +122,45 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
+  const validator = () => {
+    if(isNaN(parseInt(field.modelSpec))) return 'Check the Model field';
+    if(field.makeSpec.length < 4) return 'Check the Make field.';
+    if(isNaN(parseInt(field.sellingPrice)) || parseInt(field.sellingPrice) < 1) return 'Check the Selling Price field';
+    if(typeof(field.photo) !== 'object') return 'Check the Photo field';
+    if(field.registrationNumber.length < 6) return 'Check Registration Number field';
+    if(field.owner.length < 3) return 'Check the Owner field';
+    if(field.address.length < 6) return 'Check the Address field';
+    return true;
+  };
+
   const addCarBtnHandler = async() => {
     try{
-      const newObject = formDataCreator.moduleFunc(field);
-      await axios.post('/api/v1/cars/car', newObject)
-        .then(res => {
-          axiosResponseMessage.moduleFunc(res);
-        }).catch(err => {
-          axiosErrorMessage.moduleFunc(err);
+      if(validator() === true){
+        const newObject = formDataCreator.moduleFunc(field);
+        await axios.post('/api/v1/cars/car', newObject)
+          .then(res => {
+            axiosResponseMessage.moduleFunc(res);
+          }).catch(err => {
+            axiosErrorMessage.moduleFunc(err);
+          })
+        
+        setField({
+          modelSpec: '',
+          makeSpec: '',
+          sellingPrice: 0,
+          mileage: 0,
+          photo: '',
+          registrationNumber: '',
+          owner: '',
+          address: ''
         })
-      
-      setField({
-        modelSpec: '',
-        makeSpec: '',
-        sellingPrice: 0,
-        mileage: 0,
-        photo: '',
-        registrationNumber: '',
-        owner: '',
-        address: ''
-      })
-      
-      setTimeout(() => {
-        setRenderAgentProp(!renderAgentProp);
-      }, 250);
+        
+        setTimeout(() => {
+          setRenderAgentProp(!renderAgentProp);
+        }, 250);
+      }else{
+        setShowAlert(true);
+      }
     }catch(err){
       console.error(err.message)
     }
@@ -153,6 +170,12 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     <div className="modal" id="addCarModal" tabIndex="-1" aria-labelledby="addCarModalLabel" aria-hidden="true">
       <div className="modal-dialog modal-dialog-scrollable" role="document">
         <div className="modal-content shadow">
+          {showAlert ? 
+            <Alert variant="danger" className="pb-0" onClose={() => setShowAlert(false)} dismissible>
+              <p>{validator()}</p>
+            </Alert>
+            : null
+          }
           <div className="modal-header pl-5 pr-5" id="add-car-modal-header">
             <p className="h4 fw-bold mb-0 container-fluid">New Car</p>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -195,7 +218,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" id="save-changes-btn" onClick={addCarBtnHandler}>Add Car</button>
+            <button type="button" className="btn btn-danger" data-bs-dismiss={validator() === true ? 'modal': ''} id="save-changes-btn" onClick={addCarBtnHandler}>Add Car</button>
           </div>
         </div>
       </div>

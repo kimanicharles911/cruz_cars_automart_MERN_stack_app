@@ -1,8 +1,12 @@
 import './EditModalComponent.css';
+import {useState} from 'react';
 import axios from 'axios';
+import { Alert } from 'react-bootstrap';
 import {axiosErrorMessage, axiosResponseMessage, formDataCreator} from '../../modules';
 
 const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, setRenderAgentProp}) => {
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const modelSpecChangeHandler = (event) => {
     try{
@@ -108,19 +112,34 @@ const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, s
     }
   };
 
+  const validator = () => {
+    if(isNaN(parseInt(modalDataProp.modelSpec))) return 'Check the Model field';
+    if(modalDataProp.makeSpec.length < 4) return 'Check the Make field.';
+    if(isNaN(parseInt(modalDataProp.sellingPrice)) || parseInt(modalDataProp.sellingPrice) < 1) return 'Check the Selling Price field';
+    if(typeof(modalDataProp.photo) !== 'object') return 'Check the Photo field';
+    if(modalDataProp.registrationNumber.length < 6) return 'Check Registration Number field';
+    if(modalDataProp.owner.length < 3) return 'Check the Owner field';
+    if(modalDataProp.address.length < 6) return 'Check the Address field';
+    return true;
+  };
+
   const saveChangesBtnHandler = async() => {
     try{
-      const newObject = formDataCreator.moduleFunc(modalDataProp);
-      await axios.patch(`/api/v1/cars/car/${modalDataProp._id}`, newObject)
-        .then(res => {
-          axiosResponseMessage.moduleFunc(res);
-        }).catch(err => {
-          axiosErrorMessage.moduleFunc(err);
-        })
-      
-      setTimeout(() => {
-        setRenderAgentProp(!renderAgentProp);
-      }, 250);
+      if(validator() === true){
+        const newObject = formDataCreator.moduleFunc(modalDataProp);
+        await axios.patch(`/api/v1/cars/car/${modalDataProp._id}`, newObject)
+          .then(res => {
+            axiosResponseMessage.moduleFunc(res);
+          }).catch(err => {
+            axiosErrorMessage.moduleFunc(err);
+          })
+        
+        setTimeout(() => {
+          setRenderAgentProp(!renderAgentProp);
+        }, 250);
+      }else{
+        setShowAlert(true);
+      }
     }catch(err){
       console.error(err.message)
     }
@@ -130,6 +149,12 @@ const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, s
     <div className="modal" id="editModal" tabIndex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
       <div className="modal-dialog modal-dialog-scrollable" role="document">
         <div className="modal-content shadow">
+          {showAlert ? 
+            <Alert variant="danger" className="pb-0" onClose={() => setShowAlert(false)} dismissible>
+              <p>{validator()}</p>
+            </Alert>
+            : null
+          }
           <div className="modal-header pl-5 pr-5" id="edit-modal-header">
             <p className="h4 fw-bold mb-0 container-fluid">{modalDataProp.modelSpec} {modalDataProp.makeSpec}</p>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -172,7 +197,7 @@ const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, s
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" id="save-edit-changes-btn" onClick={saveChangesBtnHandler}>Save changes</button>
+            <button type="button" className="btn btn-danger" data-bs-dismiss={validator() === true ? 'modal': ''} id="save-edit-changes-btn" onClick={saveChangesBtnHandler}>Save changes</button>
           </div>
         </div>
       </div>

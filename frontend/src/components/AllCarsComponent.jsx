@@ -53,13 +53,13 @@ const AllCarsComponent = ({ allCarsProp, renderAgentProp, setRenderAgentProp }) 
             <div className="buttons d-flex flex-row-reverse">
 
               {/* ### Delete Modal Btn ### */}
-              <a title="Delete" href="#" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick={() => carIdReceiverFunc(oneCar._id)}><FontAwesomeIcon icon={faTrash} className="font-awesome-icons fas fa-trash-alt fa-crud-btns" id="trash-icon"/></a>
+              <a title="Delete" href="/#" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick={() => carIdReceiverFunc(oneCar._id)}><FontAwesomeIcon icon={faTrash} className="font-awesome-icons fas fa-trash-alt fa-crud-btns" id="trash-icon"/></a>
 
               {/* ### Edit Btn ### */}
-              <a title="Edit" href="#" type="button" data-bs-toggle="modal" data-bs-target="#editModal" onClick={() => carIdReceiverFunc(oneCar._id)}><FontAwesomeIcon icon={faPen} className="font-awesome-icons fas fa-pen fa-crud-btns" id="pen-icon"/></a>
+              <a title="Edit" href="/#" type="button" data-bs-toggle="modal" data-bs-target="#editModal" onClick={() => carIdReceiverFunc(oneCar._id)}><FontAwesomeIcon icon={faPen} className="font-awesome-icons fas fa-pen fa-crud-btns" id="pen-icon"/></a>
 
               {/* ### View Btn ### */}
-              <a title="View" href="#" type="button" data-bs-toggle="modal" data-bs-target="#viewModal" onClick={() => carIdReceiverFunc(oneCar._id)}><FontAwesomeIcon icon={faEye} className="font-awesome-icons fas fa-eye fa-crud-btns" id="eye-icon"/></a>
+              <a title="View" href="/#" type="button" data-bs-toggle="modal" data-bs-target="#viewModal" onClick={() => carIdReceiverFunc(oneCar._id)}><FontAwesomeIcon icon={faEye} className="font-awesome-icons fas fa-eye fa-crud-btns" id="eye-icon"/></a>
 
             </div>
           </div>

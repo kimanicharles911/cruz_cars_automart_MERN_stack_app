@@ -84,5 +84,6 @@ if(process.env.NODE_ENV === 'production'){
   • git status
   • Disable Heroku from reverting to an app.js file without a raw password by excluding app.js from version control w/:
     git update-index --assume-unchanged "app.js"
+    Undo it w/: git update-index --no-assume-unchanged "app.js"
 
 

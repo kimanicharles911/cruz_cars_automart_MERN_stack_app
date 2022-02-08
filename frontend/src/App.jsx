@@ -12,7 +12,6 @@ const App = () => {
       let dataArr;
       try{
         const response = await fetch('/api/v1/cars/car');
-        console.log(`😜called`);
         dataArr = await response.json();
       }catch(err){
         console.error(err);

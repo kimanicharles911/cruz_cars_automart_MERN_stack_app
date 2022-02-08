@@ -1,11 +1,13 @@
 import './MultipleUpdatesComponent.css';
 import { useState, Fragment } from 'react';
 import axios from 'axios';
+import { Alert } from 'react-bootstrap';
 import {axiosErrorMessage, axiosResponseMessage, formDataCreator} from '../modules';
 
 const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCarsProp, setAllCarsProp}) => {
 
   const [indexesOfUpdatedCars, setIndexesOfUpdatedCars] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
 
   const modelSpecChangeHandler = (event, carId, index) => {
     try{
@@ -121,24 +123,45 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
     }
   };
 
+  const validator = () => {
+    for(const oneCar of allCarsProp){
+      for(const oneIndex of indexesOfUpdatedCars){
+        if(allCarsProp.indexOf(oneCar) === oneIndex){
+          if(isNaN(parseInt(oneCar.modelSpec))) return 'Check the Model field';
+          if(oneCar.makeSpec.length < 4) return 'Check the Make field.';
+          if(isNaN(parseInt(oneCar.sellingPrice)) || parseInt(oneCar.sellingPrice) < 1) return 'Check the Selling Price field';
+          if(typeof(oneCar.photo) !== 'object') return 'Check the Photo field';
+          if(oneCar.registrationNumber.length < 6) return 'Check Registration Number field';
+          if(oneCar.owner.length < 3) return 'Check the Owner field';
+          if(oneCar.address.length < 6) return 'Check the Address field';
+          return true;
+        }
+      }
+    }
+  };
+
   const saveChangesBtnHandler = async() => {
     try{
-      for(const oneCar of allCarsProp){
-        for(const oneIndex of indexesOfUpdatedCars){
-          if(allCarsProp.indexOf(oneCar) === oneIndex){
-            const newObject = formDataCreator.moduleFunc(oneCar);
-            await axios.patch(`/api/v1/cars/car/${oneCar._id}`, newObject)
-              .then(res => {
-                axiosResponseMessage.moduleFunc(res);
-              }).catch(err => {
-                axiosErrorMessage.moduleFunc(err);
-              })
-      
-              setTimeout(() => {
-                setRenderAgentProp(!renderAgentProp);
-              }, 250);
+      if(validator() === true){
+        for(const oneCar of allCarsProp){
+          for(const oneIndex of indexesOfUpdatedCars){
+            if(allCarsProp.indexOf(oneCar) === oneIndex){
+              const newObject = formDataCreator.moduleFunc(oneCar);
+              await axios.patch(`/api/v1/cars/car/${oneCar._id}`, newObject)
+                .then(res => {
+                  axiosResponseMessage.moduleFunc(res);
+                }).catch(err => {
+                  axiosErrorMessage.moduleFunc(err);
+                })
+        
+                setTimeout(() => {
+                  setRenderAgentProp(!renderAgentProp);
+                }, 250);
+            }
           }
         }
+      }else{
+        setShowAlert(true);
       }
     }catch(err){
       console.error(err.message)
@@ -147,6 +170,12 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
 
   return(
     <section className="container container-fluid">
+      {showAlert ? 
+        <Alert variant="danger" className="pb-0" onClose={() => setShowAlert(false)} dismissible>
+          <p>{validator()}</p>
+        </Alert>
+        : null
+      }
       <form>
         <div className="row justify-content-end">
           <button type="button" className="col-2 btn btn-secondary">Discard Changes</button>&nbsp;

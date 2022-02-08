@@ -70,13 +70,20 @@ const updateCarFunc = async(req, res) => {
   try{
     const { id } = req.params;
     const { modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address } = req.body;
-    const dataVar = fileSystem.readFileSync(path.join('./uploadedImages/' + req.file.filename));
-    const mimeType = `image/${path.extname(path.join('./uploadedImages/' + req.file.filename)).split('.').pop()}`;
     if(!mongoose.Types.ObjectId.isValid(id)){
       return res.status(404).send(`No post with id: ${id}`);
     }
-    const updatedCarVar = { _id: id, modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo: { Data: dataVar, ContentType: mimeType } };
-    fileSystem.unlinkSync('./uploadedImages/' + req.file.filename);
+    let dataVar, mimeType, updatedCarVar;
+    if(req.file){
+      dataVar = fileSystem.readFileSync(path.join('./uploadedImages/' + req.file.filename));
+      mimeType = `image/${path.extname(path.join('./uploadedImages/' + req.file.filename)).split('.').pop()}`;
+
+      updatedCarVar = { _id: id, modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address, photo: { Data: dataVar, ContentType: mimeType } };
+
+      fileSystem.unlinkSync('./uploadedImages/' + req.file.filename);
+    }else{
+      updatedCarVar = { _id: id, modelSpec, makeSpec, sellingPrice, mileage, registrationNumber, owner, address };
+    }
     const result = await CarModel.findByIdAndUpdate(id, updatedCarVar, {new: true});
     return res.send(result);
   }catch(err){
