@@ -4,7 +4,7 @@ import { uploadFunc, createCarFunc, getCarsFunc, getSpecificCarsFunc, updateCarF
 
 // Example URL: http://localhost:8081/api/v1/cars/
 router.get('/', (req, res) => {
-  res.send('Hello user! Our API root is found at /api/v1/cars .')
+  res.send('Hello user! Our API root is found here. ( /api/v1/cars ).')
 });
 
 router.post('/car', uploadFunc, createCarFunc);
