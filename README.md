@@ -173,6 +173,7 @@ npm i --save-dev nodemon
 ##### Deploy to Heroku
 * Git does not track empty folders in the root of a repository so ensure you've manually added a little dummy data into any empty folder that is used by the application. For example those used by multer. In this case I added a dummy car image in the uploadedImages folder. This prevents POST, PATCH and PUT request errors on heroku.
 <br>
+
 * Add this in package.json
 ```sh
 "scripts": {
@@ -223,8 +224,8 @@ git push heroku master
 ```
 
 * Set MongoDB Password by first:
-Replace the .env variable in the mongoose connection string with the password itself.
-Do not use && chained git commands.
+  * Replace the .env variable in the mongoose connection string with the password itself.
+  * Do not use && chained git commands.
 ```sh
   git add .
   git status
