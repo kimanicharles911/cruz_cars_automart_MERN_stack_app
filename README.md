@@ -218,7 +218,7 @@ web: node app.js
 ```sh
 heroku create cruzcarsautomartmern
 git add . 
-git commit -m"first deploy to heroku"
+git commit -m"attempt to deploy to heroku"
 ## optional for pushing to github: git push -u origin master
 git push heroku master
 ```
