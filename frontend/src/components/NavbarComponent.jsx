@@ -10,8 +10,9 @@ import {AddCarModalComponent} from '../components';
   * I imported FontAwesomeIcon component from @fortawesome/react-fontawesome
   * I imported the Navbar, Container, Nav, Row components from react-bootstrap.
   * I imported the css style file i.e NavbarComponent.css.
-  * I imported the faHeart and faGithub components @fortawesome library.
+  * I imported the faCar, faPlus and faSyncAlt components @fortawesome library.
   * I imported the Link component from the react-router-dom.
+  * I imported the AddCarModalComponent from the components folder.
 */
 
 const NavbarComponent = ({ renderAgentProp, setRenderAgentProp }) => {
@@ -66,7 +67,10 @@ export default NavbarComponent;
 
 /* 
   * I created a Navbar component.
+  * I created multipleUpdatesClickHandler function that changes the boolean value of the setRenderAgentProp state variable when the link to the multipleupdates page is clicked causing a fetch from the API that updates the car data in the whole application.
   * I then wrote the navbar JSX that heavily relies on bootstrap and react-bootstrap libraries.
-  * The first major JSX item is the Favourites Page Link/Button.
-  * The second major JSX item is the Github Repository Link Button that redirects the user to this Application's source code repository.
+  * The first major JSX item is the Available Cars Page Link/Button.
+  * The second major JSX item is the  Link/Button.
+  * The third major JSX item is the Multiple Updates page Link/Button.
+  * The fourth major JSX item is the Github Repository Link Button that redirects the user to this Application's source code repository.
 */

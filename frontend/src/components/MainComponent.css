@@ -4,3 +4,6 @@
     max-width: 100%;
   }
 }
+/* 
+  * I set the width and max-width of the main-container to be 100% for screen of a size 576px or larger.
+*/

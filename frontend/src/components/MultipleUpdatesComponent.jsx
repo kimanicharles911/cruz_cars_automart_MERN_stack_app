@@ -4,6 +4,14 @@ import axios from 'axios';
 import { Alert } from 'react-bootstrap';
 import {axiosErrorMessage, axiosResponseMessage, formDataCreator} from '../modules';
 
+/* 
+  * I first imported the styling.
+  * I then imported the useState hook and Fragment component from react.
+  * I imported the axios promise based http client.
+  * I imported the Alert react-bootstrap component.
+  * I imported custom axios and the formDataCreator modules.
+*/
+
 const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCarsProp, setAllCarsProp}) => {
 
   const [indexesOfUpdatedCars, setIndexesOfUpdatedCars] = useState([]);
@@ -160,6 +168,9 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
             }
           }
         }
+
+        setIndexesOfUpdatedCars([]);
+
       }else{
         setShowAlert(true);
       }
@@ -167,6 +178,25 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
       console.error(err.message)
     }
   };
+  
+  /* 
+    * I created the MultipleUpdatesComponent and destructured the renderAgentProp, setRenderAgentProp, allCarsProp and setAllCarsProp passed from the App Component.
+    * I created a state variable called indexesOfUpdatedCars and setIndexesOfUpdatedCars and set it's default value to an empty array.
+    * I then created a state variable called showAlert and setShowAlert. It will be used to control the appearance of the form validation errors.
+    * I created 8 event handler functions for handling different kind of events. Each event handler 
+      * Stores the cars the user is not currently editing it's data in the untouchedCarsArr and the one the user is updating in touchedCarArr.
+      * Sets the key it is dealing with of the touchedCarArr's element to the user input or an empty string if the user deletes the previous value of the key it is dealing with.
+      * Adds the element in the touchedCarArr to the untouchedCarsArr at the same array position it was before the user edited it's data.
+      * Sets allCarsProp to the untouchedCarsArr which contains car data including the latest user's input.
+      * Calls the addIndexFunc passing the index of the affected car as a parameter.
+    * I created the addIndexFunc whuich add the index of every updated car to the indexesOfUpdatedCars state variable if it does not already exist in it.
+    * The validator function which checks if their are any empty or inappropriate form inputs of the cars whose data has been updated.
+    * The saveChangesBtnHandler function which has a condition which confirms all inputs of the cars whose data has been updated are correct and an object whose value is received from the formDataCreator module.
+    * The axios function has a try catch block in the saveChangesBtnHandler returns necessary responses in either case of a successful or failed car update to the API using the axiosResponseMessage and axiosErrorMessage modules.
+    * After 250 ms the boolean value of the setRenderAgentProp state variable is changed causing a fetch from the API that updates the car data in the whole application.
+    * I then set the indexesOfUpdatedCars to an empty array.
+    * If a form input of an updated car is empty or inappropriate an alert is shown to the client through the setShowAlert state variable.
+  */
 
   return(
     <section className="container container-fluid">
@@ -178,7 +208,6 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
       }
       <form>
         <div className="row justify-content-end">
-          <button type="button" className="col-2 btn btn-secondary">Discard Changes</button>&nbsp;
           <button type="button" className="col-2 btn btn-danger" onClick={saveChangesBtnHandler}>Save Changes</button>
         </div>
         <hr/>
@@ -216,7 +245,6 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
         ))}
 
         <div className="row justify-content-end mb-3">
-          <button type="button" className="col-2 btn btn-secondary">Discard Changes</button>&nbsp;
           <button type="button" className="col-2 btn btn-danger" onClick={saveChangesBtnHandler}>Save Changes</button>
         </div>
       </form>
@@ -224,3 +252,10 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
   )
 };
 export default MultipleUpdatesComponent;
+/* 
+  * I wrote the JSX for the main part of the application.
+  * There are 10 main JSX components. This are the validation alert component, save changes button, the model, make, selling price, mileage, photo, registration number, owner and address form inputs.
+  * All form inputs are rendered programmatically via a map which loops through all cars in the allCarsProp.
+  * All form inputs except the photo have their value set from the allCarsProp.
+  * All form inputs have an onchange attribute that calls the respective inputs change handling function passing three parameters i.e the event, carId and index of the car in the allCarsProp.
+*/

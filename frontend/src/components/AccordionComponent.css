@@ -9,8 +9,6 @@
   background-color: #DC0714;
   color: #fff;
   border-color: #DC0714;
-}
-#filter-btn{
   padding-left: 0;
 }
 
@@ -18,3 +16,8 @@
 .accordion-button:after {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
+/* 
+  * Set border-color, box-shadow, color, background-color and color of the accordion btn
+  * Set background-color, color, border-color and padding-left of the filter btn
+  * Change the dropdown icon of the accordion.
+*/

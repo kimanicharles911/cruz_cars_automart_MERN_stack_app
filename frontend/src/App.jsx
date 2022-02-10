@@ -35,13 +35,16 @@ const App = () => {
 export default App;
 
 /* 
-  * I first imported the navbar, main and favourites components from the components folder.
+  * I first imported the navbar, main and MultipleUpdates components from the components folder.
   * I then imported the Router, Routes and Route components from react-router-dom.
-  * I then imported the useState hook from react.
+  * I then imported the useState and useEffect hook from react.
+  * I then created a state variable called allCars and setAllCars and set it's default value to an empty array. They will be used to store all the cars found in the backend API.
+  * I then created a state variable called renderAgent and setRenderAgent and set it's default value to false. 
+  * The purpose of the renderAgent state is to trigger the useEffect hook in the main component to include the changes made by a user by fetching the API afresh.
+  * I used a useEffect hook to fetch data from the backend API when the application starts and when there is a change in the boolean value of the renderAgent.    
   * I then changed the App component from using a normal function to an arrow function.
-  * I then created a state variable called favourites and setFavourites and set it's default value to an empty array. They will be used to store the user's favourites.
   * I wrapped all components in the Router component.
   * I then added the NavbarComponent.
-  * I then created a Routes component and added a Route component for the Main and Favourites components.
-  * I then passed the favourites & setFavourites state variables to the NavbarComponent and MainComponent as props.
+  * I then created a Routes component and added a Route component for the Main and MultipleUpdatesComponent components.
+  * I then passed the necessary props to the NavbarComponent, MainComponent and MultipleUpdatesComponent that are necessary for them to function as expected.
 */

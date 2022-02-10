@@ -1,6 +1,7 @@
 // Car Model
 import mongoose from 'mongoose';
 
+// Comments are found in the last part of this file.
 const carSchema = new mongoose.Schema({
   modelSpec: {
     type: Number,
@@ -56,3 +57,9 @@ const carSchema = new mongoose.Schema({
 // cars is the name of the MongoDB collection
 const CarModel = mongoose.model('cars', carSchema);
 export {CarModel};
+
+/*
+ * I imported the mongoose library.
+ * I defined the car collection fields, mongoose schema types and validators.
+ * I also set the mongoose timestamp options that add the createdAt and updatedAt fields to the collection.
+ */

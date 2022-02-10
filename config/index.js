@@ -4,5 +4,5 @@ export const MONGO_DB_DATABASE = "cruzCars";
 
 /* 
   * In this file I store all configuration information.
-  * In this case I stored the port
+  * I store the port, mongoDB username and mongoDB database.
 */

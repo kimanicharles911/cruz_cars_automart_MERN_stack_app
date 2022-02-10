@@ -11,3 +11,7 @@ exports.moduleFunc = (receivedObject) => {
   
   return formDataObj;
 };
+/* 
+  * I created a module function that creates an object called formDataObj using the javascript FormData object that compile a set of key/value pairs to send to the API enabling creation/updating of data
+  * It returns the object.
+*/

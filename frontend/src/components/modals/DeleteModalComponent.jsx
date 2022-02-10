@@ -20,6 +20,13 @@ const DeleteModalComponent = ({modalDataProp, renderAgentProp, setRenderAgentPro
     }, 250)
   }
 
+  /* 
+    * I created the DeleteModalComponent and destructured the modalDataProp, renderAgentProp and setRenderAgentProp passed from the AllCarsComponent.
+    * The deleteCarBtnHandler which deletes the car the user has chosen to delete from the API.
+    * The axios function has a try catch block that returns necessary responses in either case of a successful or failed car deletion in the API using the axiosResponseMessage and axiosErrorMessage modules.
+    * After 250 ms the boolean value of the setRenderAgentProp state variable is changed causing a fetch from the API that updates the car data in the whole application.
+  */
+
   return (
     <div className="modal fade" id="deleteModal" tabIndex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered">
@@ -41,3 +48,8 @@ const DeleteModalComponent = ({modalDataProp, renderAgentProp, setRenderAgentPro
   );
 }
 export default DeleteModalComponent;
+/* 
+  => This modal has 2 major JSX items:
+    * The deleting message which shows the user the car they want to delete.
+    * The proceed to delete button which when clicked calls the deleteCarBtnHandler function that deletes the car from the API.
+*/

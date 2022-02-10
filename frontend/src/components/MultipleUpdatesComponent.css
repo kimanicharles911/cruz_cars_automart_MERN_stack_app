@@ -1,9 +1,9 @@
-#form-select{
-  height: 300px;
-}
 .btn-danger {
   color: #fff;
   background-color: #DC0714;
   border-color: #DC0714;
   font-family: inherit;
 }
+/* 
+  * Set color, background-color, border-color and inherit font of the save changes btn
+*/

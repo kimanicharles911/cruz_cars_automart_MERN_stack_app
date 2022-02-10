@@ -4,6 +4,14 @@ import axios from 'axios';
 import { Alert } from 'react-bootstrap';
 import {axiosErrorMessage, axiosResponseMessage, formDataCreator} from '../../modules';
 
+/* 
+  * I first imported the styling.
+  * I then imported the useState hook from react.
+  * I imported the axios promise based http client.
+  * I imported the Alert react-bootstrap component.
+  * I imported custom axios and the formDataCreator modules.
+*/
+
 const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, setRenderAgentProp}) => {
 
   const [showAlert, setShowAlert] = useState(false);
@@ -144,6 +152,25 @@ const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, s
       console.error(err.message)
     }
   };
+  
+  /* 
+    * I created the EditModalComponent and destructured the modalDataProp, setModalDataProp, renderAgentProp and setRenderAgentProp passed from the AllCarsComponent.
+    * I created a state variable called field and setField and set it's default value to an object whose keys are empty strings and numbers. It is where all the data from the add car form input fields will be stored.
+    * I then created a state variable called showAlert and setShowAlert. It will be used to control the appearance of the form validation errors.
+    * I created event handler functions for handling different kind of events. Most of this functions use setState callback functions to set the field state variable. This are:
+        * The modelSpecChangeHandler which updates car model in the modalDataProp variable.
+        * The makeSpecChangeHandler which updates car make in the modalDataProp variable.
+        * The sellingPriceChangeHandler which updates car selling price in the modalDataProp variable.
+        * The mileageChangeHandler which updates car mileage in the modalDataProp variable.
+        * The photoChangeHandler which updates car photo in the modalDataProp variable.      
+        * The registrationNumberChangeHandler which updates car registration number in the modalDataProp variable.
+        * The ownerChangeHandler which updates car owner in the modalDataProp variable.
+        * The addressChangeHandler which updates car address in the modalDataProp variable.
+        * The validator function which checks if their is an empty or inappropriate form input in the whole modal using the field state variable.
+        * The saveChangesBtnHandler function which has a condition which confirms all inputs are correct and an object whose value is received from the formDataCreator module.
+    * The axios function has a try catch block that returns necessary responses in either case of a successful or failed car update to the API using the axiosResponseMessage and axiosErrorMessage modules.
+    * After 250 ms the boolean value of the setRenderAgentProp state variable is changed causing a fetch from the API that updates the car data in the whole application.
+  */
 
   return (
     <div className="modal" id="editModal" tabIndex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -205,3 +232,16 @@ const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, s
   );
 };
 export default EditModalComponent;
+
+/* 
+  => This modal has 8 major JSX items which all use two way binding of the value and onChange attributes:
+      * The car model input. It is set from the modelSpec field object value and calls the modelSpecChangeHandler function on change.
+      * The car make input. It is set from the makeSpec field object value and calls the makeSpecChangeHandler function on change.
+      * The car selling price input. It is set from the sellingPrice field object value and calls the sellingPriceChangeHandler function on change.
+      * The car mileage input. It is set from the mileage field object value and calls the mileageChangeHandler function on change.
+      * The car photo input. It is set from the photo field object value and calls the photoChangeHandler function on change.
+      * The car registration number input. It is set from the registrationNumber field object value and calls the registrationNumberChangeHandler function on change.
+      * The car owner input. It is set from the owner field object value and calls the ownerChangeHandler function on change.
+      * The car address input. It is set from the address field object value and calls the addressChangeHandler function on change.
+      * The save changes button. It is used to call the saveChangesBtnHandler function that makes sure the edited car details are saved.
+*/

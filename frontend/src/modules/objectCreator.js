@@ -13,6 +13,6 @@ exports.moduleFunc = (receivedObject) => {
   return newObject;
 };
 /* 
-  * I created a module function that creates an object with similar keys to those of the API to store the respective values which are taken by axios that updates the API with the new project details.
+  * I created a module function that creates an object with similar keys to those of the API to store the respective values which are taken by axios that updates the API with the new car details.
   * It returns the object.
 */

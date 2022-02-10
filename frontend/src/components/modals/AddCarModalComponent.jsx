@@ -4,6 +4,14 @@ import './AddCarModalComponent.css';
 import { Alert } from 'react-bootstrap';
 import {axiosErrorMessage, axiosResponseMessage, formDataCreator} from '../../modules';
 
+/* 
+  * I first imported the useState hook from react.
+  * I imported the axios promise based http client.
+  * I then imported the styling.
+  * I imported the Alert react-bootstrap component.
+  * I imported custom axios and the formDataCreator modules.
+*/
+
 const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
 
   const [field, setField] = useState({
@@ -18,7 +26,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
   });
   const [showAlert, setShowAlert] = useState(false);
 
-  const createModelSpecChangeHandler = (event) => {
+  const modelSpecChangeHandler = (event) => {
     try{
       setField((prevState) => {
         return{
@@ -31,7 +39,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
-  const createMakeSpecChangeHandler = (event) => {
+  const makeSpecChangeHandler = (event) => {
     try{
       setField((prevState) => {
         return{
@@ -44,7 +52,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
-  const createSellingPriceChangeHandler = (event) => {
+  const sellingPriceChangeHandler = (event) => {
     try{
       setField((prevState) => {
         return{
@@ -57,7 +65,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
-  const createMileageChangeHandler = (event) => {
+  const mileageChangeHandler = (event) => {
     try{
       setField((prevState) => {
         return{
@@ -70,7 +78,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
-  const createPhotoChangeHandler = (event) => {
+  const photoChangeHandler = (event) => {
     try{
       setField((prevState) => {
         return{
@@ -83,7 +91,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
-  const createRegistrationNumberChangeHandler = (event) => {
+  const registrationNumberChangeHandler = (event) => {
     try{
       setField((prevState) => {
         return{
@@ -96,7 +104,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
-  const createOwnerChangeHandler = (event) => {
+  const ownerChangeHandler = (event) => {
     try{
       setField((prevState) => {
         return{
@@ -109,7 +117,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     }
   };
 
-  const createAddressChangeHandler = (event) => {
+  const addressChangeHandler = (event) => {
     try{
       setField((prevState) => {
         return{
@@ -165,6 +173,26 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
       console.error(err.message)
     }
   };
+  
+  /* 
+    * I created the AddCarModalComponent and destructured the renderAgentProp and setRenderAgentProp passed from the NavbarComponent.
+    * I created a state variable called field and setField and set it's default value to an object whose keys are empty strings and numbers. It is where all the data from the add car form input fields will be stored.
+    * I then created a state variable called showAlert and setShowAlert. It will be used to control the appearance of the form validation errors.
+    * I created event handler functions for handling different kind of events. Most of this functions use setState callback functions to set the field state variable. This are:
+        * The modelSpecChangeHandler which stores the new car model in the field variable.
+        * The makeSpecChangeHandler which stores the new car make in the field variable.
+        * The sellingPriceChangeHandler which stores the new car selling price in the field variable.
+        * The mileageChangeHandler which stores the new car mileage in the field variable.
+        * The photoChangeHandler which stores the new car photo in the field variable.      
+        * The registrationNumberChangeHandler which stores the new car registration number in the field variable.
+        * The ownerChangeHandler which stores the new car owner in the field variable.
+        * The addressChangeHandler which stores the new car address in the field variable.
+        * The validator function which checks if their is an empty or inappropriate form input in the whole modal using the field state variable.
+        * The addCarBtnHandler function which has a condition which confirms all inputs are correct and an object whose value is received from the formDataCreator module.
+    * The axios function has a try catch block that returns necessary responses in either case of a successful or failed car addition to the API using the axiosResponseMessage and axiosErrorMessage modules. 
+    * I then re-initialize the field variable.
+    * After 250 ms the boolean value of the setRenderAgentProp state variable is changed causing a fetch from the API that updates the car data in the whole application.
+  */
 
   return (
     <div className="modal" id="addCarModal" tabIndex="-1" aria-labelledby="addCarModalLabel" aria-hidden="true">
@@ -183,35 +211,35 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
           <div className="modal-body pl-5 pr-5 pt-0">
             <form>
               <div className="form-floating mb-3 mt-3">
-                <input type="number" className="form-control rounded-4" id="floatingAddCarModel" placeholder="Model" value={field.modelSpec} onChange={createModelSpecChangeHandler}/>
+                <input type="number" className="form-control rounded-4" id="floatingAddCarModel" placeholder="Model" value={field.modelSpec} onChange={modelSpecChangeHandler}/>
                 <label htmlFor="floatingAddCarModel">Model</label>
               </div>
               <div className="form-floating mb-3 mt-3">
-                <input type="text" className="form-control rounded-4" id="floatingAddCarMake" placeholder="Make" value={field.makeSpec} onChange={createMakeSpecChangeHandler}/>
+                <input type="text" className="form-control rounded-4" id="floatingAddCarMake" placeholder="Make" value={field.makeSpec} onChange={makeSpecChangeHandler}/>
                 <label htmlFor="floatingAddCarMake">Make</label>
               </div>
               <div className="form-floating mb-3">
-                <input type="number" className="form-control rounded-4" id="floatingAddCarSellingPrice" placeholder="Selling Price" value={field.sellingPrice} onChange={createSellingPriceChangeHandler}/>
+                <input type="number" className="form-control rounded-4" id="floatingAddCarSellingPrice" placeholder="Selling Price" value={field.sellingPrice} onChange={sellingPriceChangeHandler}/>
                 <label htmlFor="floatingAddCarSellingPrice">Selling Price</label>
               </div>
               <div className="form-floating mb-3">
-                <input type="number" className="form-control rounded-4" id="floatingAddCarMileage" placeholder="Mileage" value={field.mileage} onChange={createMileageChangeHandler}/>
+                <input type="number" className="form-control rounded-4" id="floatingAddCarMileage" placeholder="Mileage" value={field.mileage} onChange={mileageChangeHandler}/>
                 <label htmlFor="floatingAddCarMileage">Mileage</label>
               </div>
               <div className="mb-3">
                 <label className="form-label" htmlFor="floatingAddCarPhoto">Car Photo</label>
-                <input type="file" className="form-control rounded-4" id="floatingAddCarPhoto" onChange={createPhotoChangeHandler}/>
+                <input type="file" className="form-control rounded-4" id="floatingAddCarPhoto" onChange={photoChangeHandler}/>
               </div>
               <div className="form-floating mb-3">
-                <input type="text" className="form-control rounded-4" id="floatingAddCarRegistrationNumber" placeholder="Registration Number" value={field.registrationNumber} onChange={createRegistrationNumberChangeHandler}/>
+                <input type="text" className="form-control rounded-4" id="floatingAddCarRegistrationNumber" placeholder="Registration Number" value={field.registrationNumber} onChange={registrationNumberChangeHandler}/>
                 <label htmlFor="floatingAddCarRegistrationNumber">Registration Number</label>
               </div>
               <div className="form-floating mb-3 mt-3">
-                <input type="text" className="form-control rounded-4" id="floatingAddCarOwner" placeholder="Owner" value={field.owner} onChange={createOwnerChangeHandler}/>
+                <input type="text" className="form-control rounded-4" id="floatingAddCarOwner" placeholder="Owner" value={field.owner} onChange={ownerChangeHandler}/>
                 <label htmlFor="floatingAddCarOwner">Owner</label>
               </div>
               <div className="form-floating mb-3 mt-3">
-                <input type="text" className="form-control rounded-4" id="floatingAddCarAddress" placeholder="Address" value={field.address} onChange={createAddressChangeHandler}/>
+                <input type="text" className="form-control rounded-4" id="floatingAddCarAddress" placeholder="Address" value={field.address} onChange={addressChangeHandler}/>
                 <label htmlFor="floatingAddCarAddress">Address</label>
               </div>
             </form>
@@ -226,3 +254,16 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
   );
 };
 export default AddCarModalComponent;
+
+/* 
+  => This modal has 8 major JSX items which all use two way binding of the value and onChange attributes:
+      * The car model input. It is set from the modelSpec field object value and calls the modelSpecChangeHandler function on change.
+      * The car make input. It is set from the makeSpec field object value and calls the makeSpecChangeHandler function on change.
+      * The car selling price input. It is set from the sellingPrice field object value and calls the sellingPriceChangeHandler function on change.
+      * The car mileage input. It is set from the mileage field object value and calls the mileageChangeHandler function on change.
+      * The car photo input. It is set from the photo field object value and calls the photoChangeHandler function on change.
+      * The car registration number input. It is set from the registrationNumber field object value and calls the registrationNumberChangeHandler function on change.
+      * The car owner input. It is set from the owner field object value and calls the ownerChangeHandler function on change.
+      * The car address input. It is set from the address field object value and calls the addressChangeHandler function on change.
+      * The add car button. It is used to call the addCarBtnHandler function that makes sure the new car is created and saved.
+*/
