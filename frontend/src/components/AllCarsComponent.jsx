@@ -97,3 +97,19 @@ export default AllCarsComponent;
   * I then wrapped the other three main components i.e ViewModalComponent, EditModalComponent and DeleteModalComponent.
   * In each of the above components I passed the props needed for the modal to operate as expected.
 */
+
+/* 
+  REFERENCES
+  ==========>
+  1. Upload and Retrieve Image on MongoDB using Mongoose
+https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+  2. Node.js get file extension
+  https://stackoverflow.com/a/67934955/9497346
+  3. How to upload/store images in MongoDB using Node.js, Express & Multer
+  https://www.bezkoder.com/node-js-upload-store-images-mongodb/
+  4. https://khanasadkhan48.medium.com/. how-to-upload-a-image-to-react-express-and-how-to-store-it-in-mongodb-using-buffer-type-e82d5751da79
+  5. https://www.youtube.com/watch?v=KoWTJ5XiYm4
+  6. https://www.youtube.com/watch?v=SqbrovwhZ_o
+  7. https://www.youtube.com/watch?v=b6Oe2puTdMQ
+  8. https://attacomsian.com/blog/uploading-files-nodejs-express
+*/
