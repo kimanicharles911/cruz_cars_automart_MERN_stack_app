@@ -161,10 +161,8 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
                 }).catch(err => {
                   axiosErrorMessage.moduleFunc(err);
                 })
-        
-                setTimeout(() => {
-                  setRenderAgentProp(!renderAgentProp);
-                }, 250);
+                
+                setRenderAgentProp(!renderAgentProp);
             }
           }
         }

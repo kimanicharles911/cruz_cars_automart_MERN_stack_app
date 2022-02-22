@@ -14,10 +14,8 @@ const DeleteModalComponent = ({modalDataProp, renderAgentProp, setRenderAgentPro
       }).catch(err => {
         axiosErrorMessage.moduleFunc(err);
       })
-
-    setTimeout(() => {
+                
       setRenderAgentProp(!renderAgentProp);
-    }, 250)
   }
 
   /* 

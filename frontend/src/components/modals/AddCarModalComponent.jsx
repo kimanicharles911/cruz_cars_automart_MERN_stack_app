@@ -162,10 +162,8 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
           owner: '',
           address: ''
         })
-        
-        setTimeout(() => {
-          setRenderAgentProp(!renderAgentProp);
-        }, 250);
+                
+        setRenderAgentProp(!renderAgentProp);
       }else{
         setShowAlert(true);
       }

@@ -141,10 +141,8 @@ const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, s
           }).catch(err => {
             axiosErrorMessage.moduleFunc(err);
           })
-        
-        setTimeout(() => {
+                
           setRenderAgentProp(!renderAgentProp);
-        }, 250);
       }else{
         setShowAlert(true);
       }
