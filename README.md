@@ -141,7 +141,7 @@ npm i
 ```
 
 ##### Set up your MongoDB password
-* Create a .env file in the roor directory
+* Create a .env file in the root directory
 * Then add the below line replacing the name password123 with your MongoDB password.
 ```sh
 MONGODB_PASSWORD=password123
