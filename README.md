@@ -140,6 +140,13 @@ npm i
 "dev": "nodemon app.js"
 ```
 
+##### Set up your MongoDB password
+* Create a .env file in the roor directory
+* Then add the below line replacing the name password123 with your MongoDB password.
+```sh
+MONGODB_PASSWORD=password123
+```
+
 ##### Development Usage
 
 ```sh
