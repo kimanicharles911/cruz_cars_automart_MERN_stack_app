@@ -155,7 +155,7 @@ const MultipleUpdatesComponent = ({ renderAgentProp, setRenderAgentProp, allCars
           for(const oneIndex of indexesOfUpdatedCars){
             if(allCarsProp.indexOf(oneCar) === oneIndex){
               const newObject = formDataCreator.moduleFunc(oneCar);
-              await axios.patch(`/api/v1/cars/car/${oneCar._id}`, newObject)
+              await axios.patch(`https://cruzcarsapi.cyclic.app/api/v1/cars/car/${oneCar._id}`, newObject)
                 .then(res => {
                   axiosResponseMessage.moduleFunc(res);
                 }).catch(err => {

@@ -135,7 +135,7 @@ const EditModalComponent = ({modalDataProp, setModalDataProp, renderAgentProp, s
     try{
       if(validator() === true){
         const newObject = formDataCreator.moduleFunc(modalDataProp);
-        await axios.patch(`/api/v1/cars/car/${modalDataProp._id}`, newObject)
+        await axios.patch(`https://cruzcarsapi.cyclic.app/api/v1/cars/car/${modalDataProp._id}`, newObject)
           .then(res => {
             axiosResponseMessage.moduleFunc(res);
           }).catch(err => {

@@ -8,7 +8,7 @@ import {axiosErrorMessage, axiosResponseMessage} from '../../modules';
 const DeleteModalComponent = ({modalDataProp, renderAgentProp, setRenderAgentProp}) => {
 
   const deleteCarBtnHandler = async() => {
-    await axios.delete(`/api/v1/cars/car/${modalDataProp._id}`)
+    await axios.delete(`https://cruzcarsapi.cyclic.app/api/v1/cars/car/${modalDataProp._id}`)
       .then(res => {
         axiosResponseMessage.moduleFunc(res);
       }).catch(err => {

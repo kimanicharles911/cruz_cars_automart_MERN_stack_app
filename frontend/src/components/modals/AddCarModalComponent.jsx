@@ -145,7 +145,7 @@ const AddCarModalComponent = ({ renderAgentProp, setRenderAgentProp }) => {
     try{
       if(validator() === true){
         const newObject = formDataCreator.moduleFunc(field);
-        await axios.post('/api/v1/cars/car', newObject)
+        await axios.post('https://cruzcarsapi.cyclic.app/api/v1/cars/car', newObject)
           .then(res => {
             axiosResponseMessage.moduleFunc(res);
           }).catch(err => {

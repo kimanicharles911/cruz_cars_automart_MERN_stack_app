@@ -10,7 +10,7 @@ const AccordionComponent = ({ setAllCarsProp }) => {
   const searchBtnHandler = async() => {
     let dataArr;
     try{
-      const response = carAge ? await fetch(`/api/v1/cars/search?carAge=${carAge}`) : await fetch(`/api/v1/cars/car`);
+      const response = carAge ? await fetch(`https://cruzcarsapi.cyclic.app/api/v1/cars/search?carAge=${carAge}`) : await fetch(`https://cruzcarsapi.cyclic.app/api/v1/cars/car`);
       dataArr = await response.json();
     }catch(err){
       console.error(err);

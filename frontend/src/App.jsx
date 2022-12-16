@@ -11,7 +11,7 @@ const App = () => {
     (async () => {
       let dataArr;
       try{
-        const response = await fetch('/api/v1/cars/car');
+        const response = await fetch('https://cruzcarsapi.cyclic.app/api/v1/cars/car');
         dataArr = await response.json();
       }catch(err){
         console.error(err);
